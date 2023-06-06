@@ -19,6 +19,21 @@ spring:
         min-idle: 1
         time-between-eviction-runs: 10s
     database: 1
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 121.4.113.134:9092
+          zk-nodes: 121.4.113.134:2181
+          autoCreateTopics: true
+          requiredAcks: 1
+          autoAddPartitions: true
+      bindings:
+        input:
+          destination: stream-demo
+        output: #这里用stream给我们提供的默认output，后面会讲到自定义output
+          destination: stream-demo    #消息发往的目的地
+          content-type: text/plain    #消息发送的格式，接收端不用指定格式，但是发送端要
   rabbitmq:
     host: 121.4.113.134
     port: 5672
